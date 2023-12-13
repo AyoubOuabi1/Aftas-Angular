@@ -1,0 +1,35 @@
+<!-- competition-form.component.html -->
+<div class="container mt-5">
+  <form [formGroup]="competitionForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
+      <input type="date" class="form-control" id="date" formControlName="date" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="startTime" class="form-label">Start Time <span class="text-danger">*</span></label>
+      <input type="time" class="form-control" id="startTime" formControlName="startTime" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="endTime" class="form-label">End Time <span class="text-danger">*</span></label>
+      <input type="time" class="form-control" id="endTime" formControlName="endTime" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="numberOfParticipants" class="form-label">Number of Participants <span class="text-danger">*</span></label>
+      <input type="number" class="form-control" id="numberOfParticipants" formControlName="numberOfParticipants" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="location" class="form-label">Location <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" id="location" formControlName="location" required>
+    </div>
+    <div class="mb-3">
+      <label for="amount" class="form-label">amount <span class="text-danger">*</span></label>
+      <input type="number" class="form-control" id="amount" formControlName="amount" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
