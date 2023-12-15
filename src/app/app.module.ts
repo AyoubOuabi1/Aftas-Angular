@@ -12,6 +12,7 @@ import { MembersComponent } from './components/members/members.component';
 import { HuntComponent } from './components/hunt/hunt.component';
 import { RankComponent } from './components/rank/rank.component';
 import {HttpClientModule} from "@angular/common/http";
+import { CompetitionModalComponent } from './components/competition/competition-modal/competition-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {HttpClientModule} from "@angular/common/http";
     FishComponent,
     MembersComponent,
     HuntComponent,
-    RankComponent
+    RankComponent,
+    CompetitionModalComponent
   ],
     imports: [
         BrowserModule,

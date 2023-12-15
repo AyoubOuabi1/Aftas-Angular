@@ -1,46 +1,33 @@
-import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CompetitionModule} from "../../entities/competition/competition.module";
 import {CompetitionService} from "../../services/competitions/competition.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-competition',
   templateUrl: './competition.component.html',
   styleUrls: ['./competition.component.css']
 })
-export class CompetitionComponent {
+export class CompetitionComponent implements OnChanges,OnInit{
 
-  competitionForm: FormGroup;
-
-  constructor(private fb: FormBuilder,private competitionService:CompetitionService) {
-    this.competitionForm = this.fb.group({
-      id: [null],
-      code: [null],
-      date: [null, Validators.required],
-      startTime: [null, Validators.required],
-      endTime: [null, Validators.required],
-      numberOfParticipants: [null, [Validators.required, Validators.min(3)]],
-      location: [null, Validators.required],
-      status: [null],
-      amount: [null, [Validators.required,Validators.min(0)]]
-    });
+  competitions!:Observable<Array<CompetitionModule>>
+  constructor(private competitionService:CompetitionService) {
   }
-  onSubmit() {
-    if (this.competitionForm.valid) {
-      const competitionData: CompetitionModule = this.competitionForm.value;
-      this.competitionService.save(competitionData).subscribe(
-        {
-          next : (data) =>{
-            console.log('Competition Data:', data);
-          },
-          error : (data) =>{
-              console.log('Error '+data);
-          }
-
-        }
-      );
-    } else {
-      console.log('all inputs fields required')
-    }
+  ngOnChanges(changes: SimpleChanges): void {
   }
+
+  ngOnInit(): void {
+    this.getCompetitions();
+  }
+
+  public getCompetitions():void {
+      this.competitions=this.competitionService.getComps();
+  }
+
+  refreshTable(): void {
+    this.getCompetitions();
+  }
+
+
+
 }
