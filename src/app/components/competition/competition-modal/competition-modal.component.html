@@ -44,7 +44,9 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-          <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Submit</button>
+          <button type="submit" *ngIf="!competition" data-bs-dismiss="modal" class="btn btn-primary">Submit</button>
+          <button *ngIf="competition" type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
+
 
       </div>
       </form>

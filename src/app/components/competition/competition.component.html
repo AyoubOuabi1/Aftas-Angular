@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-end mb-3">
-    <button type="button" class="btn btn-primary float-start" data-bs-toggle="modal" data-bs-target="#competition-modal">
+    <button type="button" class="btn btn-primary float-start" (click)="resetForm()" data-bs-toggle="modal" data-bs-target="#competition-modal">
     Create Competition
     </button>
   </div>
@@ -17,32 +17,47 @@
       <th>Number Of Participants</th>
       <th>Status</th>
       <th>Amount</th>
+      <th> </th>
+      <th> </th>
     </tr>
     </thead>
     <tbody style="background-color: #0C1427">
-    <tr *ngFor="let competition of competitions | async">
+    <tr *ngFor="let competition of competitions">
       <td>{{competition.code}}</td>
       <td>{{competition.date}}</td>
       <td>{{competition.startTime}}</td>
       <td>{{competition.endTime}}</td>
       <td>{{competition.location}}</td>
-      <td>{{competition.numberOfParticipants}}</td>
+      <td class="text-center">{{competition.numberOfParticipants}}</td>
       <td>{{competition.status}}</td>
       <td>{{competition.amount}}</td>
+      <td>
+        <button (click)="deleteComp(competition)" class="btn btn-outline-danger">
+          <i class="bi bi-trash"></i>
+        </button>
+      </td>
+      <td>
+        <button (click)="editComp(competition)" data-bs-toggle="modal" data-bs-target="#competition-modal" class="btn btn-outline-primary">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+      </td>
     </tr>
     </tbody>
     <tfoot>
     <tr>
-      <th>Code</th>
-      <th>Date</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Location</th>
-      <th>Number Of Participants</th>
-      <th>Status</th>
-      <th>Amount</th>
+
     </tr>
     </tfoot>
   </table>
 </div>
-<app-competition-modal (competitionAdded)="refreshTable()"></app-competition-modal>
+<nav aria-label="Page navigation example text-white">
+  <ul class="pagination">
+    <li class="page-item" *ngFor="let page of getPages()">
+      <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+    </li>
+  </ul>
+</nav>
+<app-competition-modal
+      [competition]="selectedCompetition"
+      (competitionAdded)="refreshTable()">
+</app-competition-modal>
