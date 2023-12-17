@@ -13,9 +13,9 @@ export class CompetitionComponent implements OnInit {
 
   competitions!: Array<CompetitionModule>
   selectedCompetition: CompetitionModule | null = null;
-
-  currentPage: number = 0; // 0-indexed
-  pageSize: number = 4;
+  currentPageSelected:number =0;
+  currentPage: number = 0;
+  pageSize: number = 5;
   totalPages: number = 0;
 
   constructor(private competitionService: CompetitionService) {
@@ -42,6 +42,9 @@ export class CompetitionComponent implements OnInit {
     this.selectedCompetition = competition;
   }
 
+  getCurretPageSelected(currentPageSelected:number):void{
+    this.currentPageSelected=currentPageSelected;
+  }
   resetForm() :void{
     this.selectedCompetition=null;
   }
@@ -57,7 +60,13 @@ export class CompetitionComponent implements OnInit {
       if (result.value) {
 
         this.competitionService.delete(comp).subscribe(
-          () => { this.getCompetitions();}
+          () => {
+            console.log('Competition deleted successfully');
+            this.getCompetitions();
+          },
+          (error) => {
+            console.error('Error deleting competition:', error);
+          }
         )
         Swal.fire(
           'Deleted!',
