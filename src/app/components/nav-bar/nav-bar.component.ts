@@ -11,7 +11,7 @@ export class NavBarComponent {
     {"title":"Competitions","route":"/competitions"},
     {"title":"hunts","route":"/hunts"},
     {"title":"Fishs","route":"/fishs"},
-    {"title":"ranks","route":"/ranks"},
+    {"title":"participations","route":"/participations"},
   ];
 
   currentAction: any;

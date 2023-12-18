@@ -13,6 +13,8 @@ import { HuntComponent } from './components/hunt/hunt.component';
 import { RankComponent } from './components/rank/rank.component';
 import {HttpClientModule} from "@angular/common/http";
 import { CompetitionModalComponent } from './components/competition/competition-modal/competition-modal.component';
+ import { ParticipationModalComponent } from './components/participation/participation-modal/participation-modal.component';
+import {ParticipationComponent} from "./components/participation/participation.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CompetitionModalComponent } from './components/competition/competition-
     MembersComponent,
     HuntComponent,
     RankComponent,
-    CompetitionModalComponent
+    ParticipationComponent,
+    CompetitionModalComponent,
+     ParticipationModalComponent
   ],
     imports: [
         BrowserModule,

@@ -14,7 +14,9 @@ export class CompetitionService {
   public getComps(currentPage: number,size:number) : Observable<CompetitionResponse>{
     return this.httpClient.get<CompetitionResponse>(this._url+"/all?page="+`${currentPage}`+"&size="+`${size}`);
   }
-
+  public getAllComps():Observable<Array<CompetitionModule>>{
+    return this.httpClient.get<Array<CompetitionModule>>(this._url);
+  }
   public getCompsSize() : Observable<number>{
     return this.httpClient.get<number>(this._url+"/sizes");
   }

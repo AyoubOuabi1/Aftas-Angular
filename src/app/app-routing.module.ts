@@ -5,13 +5,14 @@ import {FishComponent} from "./components/fish/fish.component";
 import {HuntComponent} from "./components/hunt/hunt.component";
 import {MembersComponent} from "./components/members/members.component";
 import {RankComponent} from "./components/rank/rank.component";
+import {ParticipationComponent} from "./components/participation/participation.component";
 
 const routes: Routes = [
   {path : "competitions", component: CompetitionComponent},
   {path : "fishs", component: FishComponent},
   {path : "hunts", component: HuntComponent},
   {path : "members", component: MembersComponent},
-  {path : "ranks", component: RankComponent}
+  {path : "participations", component: ParticipationComponent}
 ];
 
 @NgModule({
