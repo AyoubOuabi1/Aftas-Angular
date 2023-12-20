@@ -8,6 +8,7 @@ import {MemberService} from "../../services/member/member.service";
 import {FishService} from "../../services/fish/fish.service";
 import {Observable} from "rxjs";
 import {HuntService} from "../../services/hunt/hunt.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-hunt',
@@ -52,12 +53,14 @@ export class HuntComponent implements OnInit {
       const huntData = this.huntForm.value;
       this.huntService.addHunt(huntData).subscribe(
         () => {
-          // Hunt added successfully, you can perform additional actions if needed
-          console.log('Hunt added successfully');
+            Swal.fire({
+            title: "Good job!",
+            text: "Hunt added successfully",
+            icon: "success"
+          });
           this.huntForm.reset();
         },
         (error) => {
-          // Handle error
           console.error('Error adding hunt', error);
         }
       );

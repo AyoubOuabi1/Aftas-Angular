@@ -5,44 +5,48 @@
     <h4>Top 3 Hunters</h4>
   </div>
   <div class="card-body mt-5">
-    <form [formGroup]="winnersForm">
       <div class="d-flex justify-content-between mb-3">
         <div>
-          <label for="competitionSelect">Select Competition:</label>
-          <select id="competitionSelect" class="form-control" formControlName="competitionId" (change)="onCompetitionChange()">
-            <!-- Populate the competition options here -->
+          <label for="competitionId">Select Competition:</label>
+          <select id="competitionId" class="form-control" [(ngModel)]="selectedCompetitionId" (change)="onCompetitionChange()">
+              <option *ngFor="let competition of competitions| async" [value]="competition.id">{{competition.code}}</option>
           </select>
         </div>
       </div>
-    </form>
 
-    <div *ngIf="winners.length > 0">
+    <div *ngIf="winners.length > 0" >
       <h5>Top 3 Hunters:</h5>
       <div class="row">
         <div class="col">
-          <!-- First Place -->
           <div class="card">
+            <div class="card-header">
+              <h1>First Place</h1>
+            </div>
             <div class="card-body">
               <h6 class="card-title">{{ winners[0].name }} {{ winners[0].familyName }}</h6>
-              <p class="card-text">Score: {{ winners[0].score }}</p>
+
             </div>
           </div>
         </div>
         <div class="col">
-          <!-- Second Place -->
+
           <div class="card">
+            <div class="card-header">
+              <h1>Second Place</h1>
+            </div>
             <div class="card-body">
               <h6 class="card-title">{{ winners[1].name }} {{ winners[1].familyName }}</h6>
-              <p class="card-text">Score: {{ winners[1].score }}</p>
+
             </div>
           </div>
         </div>
         <div class="col">
-          <!-- Third Place -->
           <div class="card">
+            <div class="card-header">
+              <h1>Third Place</h1>
+            </div>
             <div class="card-body">
               <h6 class="card-title">{{ winners[2].name }} {{ winners[2].familyName }}</h6>
-              <p class="card-text">Score: {{ winners[2].score }}</p>
             </div>
           </div>
         </div>

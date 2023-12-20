@@ -22,9 +22,6 @@ export class ParticipationComponent implements OnInit {
 
   }
 
-
-
-
   loadRankingsByCompetition(): void {
     if (this.selectedCompetitionId !== null) {
       this.rankingsList=this.rankingService.getRankingsByCompetition(this.selectedCompetitionId);

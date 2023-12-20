@@ -6,36 +6,36 @@ import {Observable} from "rxjs";
 import {CompetitionModule} from "../../entities/competition/competition.module";
 import {MemberModule} from "../../entities/member/member.module";
 import {PodiumService} from "../../services/podium/podium.service";
+import {CompetitionService} from "../../services/competitions/competition.service";
 
 @Component({
-  selector: 'app-winners',
-  templateUrl: './winners.component.html',
-  styleUrls: ['./winners.component.css']
+  selector: 'app-podium',
+  templateUrl: './podium.component.html',
+  styleUrls: ['./podium.component.css']
 })
 export class PodiumComponent implements OnInit {
-  winnersForm: FormGroup;
   competitions!: Observable<Array<CompetitionModule>>;
   winners: MemberModule[] = [];
+  selectedCompetitionId!:number;
 
-  constructor(private formBuilder: FormBuilder, private podiumService: PodiumService) {
-    this.winnersForm = this.formBuilder.group({
-      competitionId: [null, Validators.required],
-    });
+  constructor(private formBuilder: FormBuilder,
+              private podiumService: PodiumService,
+              private competitionService: CompetitionService) {
+
   }
 
   ngOnInit(): void {
+    this.competitions=this.competitionService.getAllComps()
   }
 
   onCompetitionChange() {
-    // @ts-ignore
-    const competitionId = this.winnersForm.get('competitionId').value;
-    if (competitionId !== null) {
-      this.podiumService.getWinners(competitionId).subscribe(
+     this.winners=[]
+    if (this.selectedCompetitionId !== null) {
+      this.podiumService.getWinners(this.selectedCompetitionId).subscribe(
         (winners) => {
           this.winners = winners;
         },
         (error) => {
-          // Handle error
           console.error('Error fetching winners', error);
         }
       );

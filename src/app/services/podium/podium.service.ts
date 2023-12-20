@@ -13,7 +13,6 @@ export class PodiumService {
   constructor(private httpClient: HttpClient) { }
 
   public getWinners(competitionId: number): Observable<Array<MemberModule>> {
-    const url = `${this._url}/${competitionId}`;
-    return this.httpClient.get<Array<MemberModule>>(url);
+    return this.httpClient.get<Array<MemberModule>>(this._url+`/${competitionId}`);
   }
 }
