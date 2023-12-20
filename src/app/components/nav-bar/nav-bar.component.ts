@@ -10,7 +10,7 @@ export class NavBarComponent {
   actions: Array<any>=[
     {"title":"Competitions","route":"/competitions"},
     {"title":"hunts","route":"/hunts"},
-    {"title":"Fishs","route":"/fishs"},
+    {"title":"Result","route":"/result"},
     {"title":"participations","route":"/participations"},
   ];
 

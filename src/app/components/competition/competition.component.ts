@@ -11,12 +11,13 @@ import Swal from 'sweetalert2';
 })
 export class CompetitionComponent implements OnInit {
 
-  competitions!: Array<CompetitionModule>
+  competitions!: CompetitionModule[]
   selectedCompetition: CompetitionModule | null = null;
   currentPageSelected:number =0;
   currentPage: number = 0;
   pageSize: number = 5;
   totalPages: number = 0;
+  selectedStatus: string = "all";
 
   constructor(private competitionService: CompetitionService) {
   }
@@ -28,11 +29,15 @@ export class CompetitionComponent implements OnInit {
   }
 
   getCompetitions(): void {
-    this.competitionService.getComps(this.currentPage, this.pageSize)
+    this.competitionService.getComps(this.currentPage, this.pageSize, this.selectedStatus)
       .subscribe(response => {
         this.competitions = response.content;
         this.totalPages = response.totalPages;
       });
+  }
+  onStatusChange(): void {
+     this.currentPage = 0;
+    this.getCompetitions();
   }
   refreshTable(): void {
     this.getCompetitions();

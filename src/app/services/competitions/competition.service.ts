@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CompetitionModule} from "../../entities/competition/competition.module";
 import { CompetitionResponse } from 'src/app/entities/competition/CompetitionResponse.module';
@@ -11,15 +11,30 @@ export class CompetitionService {
   private _url = "http://localhost:8080/api/v1/competition";
   constructor(private httpClient:HttpClient) { }
 
-  public getComps(currentPage: number,size:number) : Observable<CompetitionResponse>{
-    return this.httpClient.get<CompetitionResponse>(this._url+"/all?page="+`${currentPage}`+"&size="+`${size}`);
+  public getOpenComps():Observable<Array<CompetitionModule>>{
+    return this.httpClient.get<Array<CompetitionModule>>(this._url+"/open");
+  }
+
+  public getActiveComps():Observable<Array<CompetitionModule>>{
+    return this.httpClient.get<Array<CompetitionModule>>(this._url+"/active");
+  }
+
+  getComps(currentPage: number, size: number, status: string): Observable<CompetitionResponse> {
+    let params = new HttpParams()
+      .set('page', currentPage.toString())
+      .set('size', size.toString())
+      .set("status",status.toString());
+
+
+
+    return this.httpClient.get<CompetitionResponse>(`${this._url}/all`, { params });
   }
   public getAllComps():Observable<Array<CompetitionModule>>{
     return this.httpClient.get<Array<CompetitionModule>>(this._url);
   }
-  public getCompsSize() : Observable<number>{
-    return this.httpClient.get<number>(this._url+"/sizes");
-  }
+
+
+
   public save(comp : CompetitionModule) : Observable<CompetitionModule>{
     return  this.httpClient.post<CompetitionModule>(this._url,comp)
   }

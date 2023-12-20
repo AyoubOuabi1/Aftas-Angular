@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RankingService } from "../../../services/ranking/ranking.service";
 import { RankingModule } from "../../../entities/ranking/ranking.module";
@@ -46,10 +46,15 @@ export class ParticipationModalComponent implements OnInit {
     } else {
       console.log('All input fields are required');
     }
+    this.pactcipantForm.reset();
   }
 
   ngOnInit(): void {
-    this.membersList = this.memberService.getMembers();
-    this.competitionsList = this.competitionService.getAllComps();
+    this.competitionsList = this.competitionService.getOpenComps();
+    this.pactcipantForm.get('competitionId')?.valueChanges.subscribe((competitionId) => {
+      this.membersList = this.memberService.getMembers(competitionId);
+    });
   }
+
+
 }
