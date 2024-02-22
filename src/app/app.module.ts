@@ -11,11 +11,14 @@ import { FishComponent } from './components/fish/fish.component';
 import { MembersComponent } from './components/members/members.component';
 import { HuntComponent } from './components/hunt/hunt.component';
 import { RankComponent } from './components/rank/rank.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { CompetitionModalComponent } from './components/competition/competition-modal/competition-modal.component';
  import { ParticipationModalComponent } from './components/participation/participation-modal/participation-modal.component';
 import {ParticipationComponent} from "./components/participation/participation.component";
 import { PodiumComponent } from './components/podium/podium.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import {TokenInterInterceptor} from "./interceptor/token-inter.interceptor";
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { PodiumComponent } from './components/podium/podium.component';
     ParticipationComponent,
     CompetitionModalComponent,
     ParticipationModalComponent,
-    PodiumComponent
+    PodiumComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,11 @@ import { PodiumComponent } from './components/podium/podium.component';
     FormsModule,
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,10 @@
 import {Time} from "@angular/common";
 
-export interface MemberModule {
+export interface UserModule {
 
   id: number;
+  username: string;
+  email: string;
   num: number;
   name: string;
   familyName: string;

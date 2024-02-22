@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Observable} from "rxjs";
 import {CompetitionModule} from "../../entities/competition/competition.module";
-import {MemberModule} from "../../entities/member/member.module";
+import {UserModule} from "../../entities/member/userModule";
 import {PodiumService} from "../../services/podium/podium.service";
 import {CompetitionService} from "../../services/competitions/competition.service";
 
@@ -15,7 +15,7 @@ import {CompetitionService} from "../../services/competitions/competition.servic
 })
 export class PodiumComponent implements OnInit {
   competitions!: Observable<Array<CompetitionModule>>;
-  winners: MemberModule[] = [];
+  winners: UserModule[] = [];
   selectedCompetitionId!:number;
 
   constructor(private formBuilder: FormBuilder,
@@ -23,6 +23,7 @@ export class PodiumComponent implements OnInit {
               private competitionService: CompetitionService) {
 
   }
+
 
   ngOnInit(): void {
     this.competitions=this.competitionService.getAllComps()

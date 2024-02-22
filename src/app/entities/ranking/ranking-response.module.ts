@@ -1,4 +1,4 @@
-import {MemberModule} from "../member/member.module";
+import {UserModule} from "../member/userModule";
 import {CompetitionModule} from "../competition/competition.module";
 
 
@@ -6,7 +6,7 @@ export interface RankingModuleResponse {
   id: number;
   rank: number;
   score: number;
-  member: MemberModule;
+  user: UserModule;
   competition: CompetitionModule;
 }
 

@@ -5,7 +5,7 @@ import { RankingModule } from "../../../entities/ranking/ranking.module";
 import { MemberService } from "../../../services/member/member.service";
 import { CompetitionService } from "../../../services/competitions/competition.service";
 import { Observable } from "rxjs";
-import { MemberModule } from "../../../entities/member/member.module";
+import { UserModule } from "../../../entities/member/userModule";
 import { CompetitionModule } from "../../../entities/competition/competition.module";
 
 @Component({
@@ -17,7 +17,7 @@ export class ParticipationModalComponent implements OnInit {
   @Output() participantAdded: EventEmitter<void> = new EventEmitter<void>();
   pactcipantForm: FormGroup;
 
-  membersList!: Observable<Array<MemberModule>>;
+  membersList!: Observable<Array<UserModule>>;
   competitionsList!: Observable<Array<CompetitionModule>>;
 
   constructor(

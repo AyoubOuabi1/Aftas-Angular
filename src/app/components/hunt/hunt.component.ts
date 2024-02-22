@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompetitionModule } from '../../entities/competition/competition.module';
-import { MemberModule } from '../../entities/member/member.module';
+import { UserModule } from '../../entities/member/userModule';
 import {FishModule} from "../../entities/fish/fish.module";
 import {CompetitionService} from "../../services/competitions/competition.service";
 import {MemberService} from "../../services/member/member.service";
@@ -18,7 +18,7 @@ import Swal from "sweetalert2";
 export class HuntComponent implements OnInit {
   huntForm : FormGroup;
   competitions: CompetitionModule[] = [];
-  members!: Observable<Array<MemberModule>> ;
+  members!: Observable<Array<UserModule>> ;
   fishes!:Observable<Array<FishModule>>;
   selectedCompetitionId!:number;
 
@@ -36,15 +36,17 @@ export class HuntComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.competitionService.getActiveComps().subscribe(
+    this.competitionService.getOpenComps().subscribe(
       (competitions) => {
       this.competitions = competitions;
+      console.log(this.competitions);
     });
     this.fishes=this.fishService.getFishes();
   }
   onCompetitionChange() {
     if (this.selectedCompetitionId !== null) {
       this.members=this.memberService.getMembersByCompetitions(this.selectedCompetitionId);
+      console.log(this.members)
     }
 
   }
