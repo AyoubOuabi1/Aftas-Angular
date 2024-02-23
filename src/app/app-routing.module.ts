@@ -9,17 +9,21 @@ import {PodiumComponent} from "./components/podium/podium.component";
 import {LoginComponent} from "./components/login/login.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {authGuard} from "./guard/auth/auth.guard";
+import {UnauthorizedComponent} from "./components/unauthorized/unauthorized.component";
+import {roleGuard} from "./guard/role-guard.guard";
+import {unAuthGuard} from "./guard/auth/un-auth.guard";
 
 const routes: Routes = [
-  {path : "competitions", component: CompetitionComponent , canActivate: [authGuard]},
+  {path : "competitions", component: CompetitionComponent , canActivate: [authGuard, roleGuard]},
   {path : "", component: CompetitionComponent, canActivate: [authGuard]},
-  {path : "fishs", component: FishComponent, canActivate: [authGuard]},
-  {path : "hunts", component: HuntComponent, canActivate: [authGuard]},
-  {path : "members", component: MembersComponent, canActivate: [authGuard]},
-  {path : "podium", component: PodiumComponent, canActivate: [authGuard]},
-  {path : "participations", component: ParticipationComponent, canActivate: [authGuard]},
-  {path : "login", component: LoginComponent},
-  {path : "register", component: RegisterComponent}
+  {path : "fishs", component: FishComponent, canActivate: [authGuard, roleGuard]},
+  {path : "hunts", component: HuntComponent, canActivate: [authGuard, roleGuard]},
+  {path : "members", component: MembersComponent, canActivate: [authGuard, roleGuard]},
+  {path : "podium", component: PodiumComponent, canActivate: [authGuard, roleGuard]},
+  {path : "participations", component: ParticipationComponent, canActivate: [authGuard, roleGuard]},
+  { path: 'unauthorized', component: UnauthorizedComponent, canActivate : [authGuard] },
+  {path : "login", component: LoginComponent, canActivate: [unAuthGuard]},
+  {path : "register", component: RegisterComponent , canActivate: [unAuthGuard]}
 ];
 
 @NgModule({

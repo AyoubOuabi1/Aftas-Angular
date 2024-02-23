@@ -19,6 +19,7 @@ import { PodiumComponent } from './components/podium/podium.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import {TokenInterInterceptor} from "./interceptor/token-inter.interceptor";
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {TokenInterInterceptor} from "./interceptor/token-inter.interceptor";
     PodiumComponent,
     LoginComponent,
     RegisterComponent,
+    UnauthorizedComponent,
   ],
   imports: [
     BrowserModule,

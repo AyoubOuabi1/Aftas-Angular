@@ -1,21 +1,37 @@
-import {CanActivateFn, Router} from '@angular/router';
-import {ResponseDto} from "../entities/user/responseDto.module";
+import { CanActivateFn, Router } from '@angular/router';
+import { ResponseDto } from "../entities/user/responseDto.module";
+import {inject} from "@angular/core";
 
 export const roleGuard: CanActivateFn = (route, state) => {
-
-  const router: Router = new Router();
+  const router = inject(Router);
   const responseString: string | null = localStorage.getItem('user');
   const response: ResponseDto = responseString ? JSON.parse(responseString) : {};
 
-  if (response.role === 'MANAGER' && state.url.startsWith('/manager')) {
+  console.log(response.role);
+
+  if (response.role === 'MANAGER') {
+    if(state.url.startsWith('/competitions') || state.url.startsWith('/hunts') || state.url.startsWith('/podium') || state.url.startsWith('/participations')  || state.url.startsWith('/fishs')  || state.url.startsWith('/users')){
       return true;
-  } else if (response.role === 'USER' && state.url.startsWith('/user')) {
-      return true;
-  }else if (response.role === 'JURY' && state.url.startsWith('/jury')) {
-      return true;
-  } else {
-      router.navigate(['/login']);
+    }else{
+      router.navigate(['/unauthorized']);
       return false;
+    }
+  }else if (response.role === 'JURY') {
+    if(state.url.startsWith('/competitions') || state.url.startsWith('/hunts') || state.url.startsWith('/podium') || state.url.startsWith('/participations') || state.url.startsWith('/fishs') ){
+      return true;
+    }else{
+      router.navigate(['/unauthorized']);
+      return false;
+    }
+  }else if (response.role === 'USER') {
+    if(state.url.startsWith('/competitions') || state.url.startsWith('/podium') || state.url.startsWith('/participations')){
+      return true;
+    }else{
+      router.navigate(['/unauthorized']);
+      return false;
+    }
   }
 
+  return false;
 };
+
