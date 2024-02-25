@@ -20,6 +20,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import {TokenInterInterceptor} from "./interceptor/token-inter.interceptor";
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { UserComponent } from './components/user/user.component';
+import { ActiveComponent } from './components/active/active.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
     LoginComponent,
     RegisterComponent,
     UnauthorizedComponent,
+    UserComponent,
+    ActiveComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@ import { CompetitionModule } from '../../entities/competition/competition.module
 import { UserModule } from '../../entities/member/userModule';
 import {FishModule} from "../../entities/fish/fish.module";
 import {CompetitionService} from "../../services/competitions/competition.service";
-import {MemberService} from "../../services/member/member.service";
+import {UserService} from "../../services/member/user.service";
 import {FishService} from "../../services/fish/fish.service";
 import {Observable} from "rxjs";
 import {HuntService} from "../../services/hunt/hunt.service";
@@ -25,7 +25,7 @@ export class HuntComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private huntService: HuntService,
               private competitionService: CompetitionService,
-              private memberService: MemberService,
+              private memberService: UserService,
               private fishService: FishService) {
     this.huntForm = this.formBuilder.group({
       competitionId: [null, Validators.required],

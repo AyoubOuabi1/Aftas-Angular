@@ -23,7 +23,7 @@ export class RegisterComponent {
     this.authService.register(user).subscribe({
       next: user => {
         console.log(user);
-        this.router.navigate(['/competition']);
+        this.router.navigate(['/competitions']);
       },
       error: error => {
         console.log(error);

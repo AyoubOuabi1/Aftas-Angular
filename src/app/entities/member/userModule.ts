@@ -9,6 +9,8 @@ export interface UserModule {
   name: string;
   familyName: string;
   accessionDate: Time;
+  active: boolean;
+  role: string;
   nationality: string;
   identityDocument: string;
   identityNumber: string;

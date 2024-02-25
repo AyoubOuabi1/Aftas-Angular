@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class MemberService {
+export class UserService {
   private _url = "http://localhost:8080/api/v1/user";
   constructor(private httpClient:HttpClient) { }
 
@@ -16,5 +16,13 @@ export class MemberService {
 
   public getMembersByCompetitions(competitionId : number|null):Observable<Array<UserModule>>{
     return this.httpClient.get<Array<UserModule>>(this._url+"/competitions/rank?competitionId="+`${competitionId}`)
+  }
+
+  public getAllUsers():Observable<Array<UserModule>>{
+    return this.httpClient.get<Array<UserModule>>(this._url)
+  }
+
+  public updateUser(id: number):Observable<Array<UserModule>>{
+    return this.httpClient.put<Array<UserModule>>(this._url+"/updatestatus/"+id, null)
   }
 }

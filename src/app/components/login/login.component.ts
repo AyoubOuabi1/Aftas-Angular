@@ -26,7 +26,11 @@ export class LoginComponent implements OnInit  {
       formLogin.value.email, formLogin.value.password).subscribe({
       next: user => {
         console.log(user);
-        this.router.navigate(['competitions']);
+        if (user.active){
+          this.router.navigate(['competitions']);
+        }else{
+          this.router.navigate(['status']);
+        }
 
       },
       error: error => {

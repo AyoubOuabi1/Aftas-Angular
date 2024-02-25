@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from 
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RankingService } from "../../../services/ranking/ranking.service";
 import { RankingModule } from "../../../entities/ranking/ranking.module";
-import { MemberService } from "../../../services/member/member.service";
+import { UserService } from "../../../services/member/user.service";
 import { CompetitionService } from "../../../services/competitions/competition.service";
 import { Observable } from "rxjs";
 import { UserModule } from "../../../entities/member/userModule";
@@ -23,7 +23,7 @@ export class ParticipationModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private rankingService: RankingService,
-    private memberService: MemberService,
+    private memberService: UserService,
     private competitionService: CompetitionService
   ) {
     this.pactcipantForm = this.fb.group({

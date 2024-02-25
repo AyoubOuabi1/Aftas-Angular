@@ -8,29 +8,34 @@ export const roleGuard: CanActivateFn = (route, state) => {
   const response: ResponseDto = responseString ? JSON.parse(responseString) : {};
 
   console.log(response.role);
+ if (response.active){
+   if (response.role === 'MANAGER') {
+     if(state.url.startsWith('/competitions') || state.url.startsWith('/hunts') || state.url.startsWith('/podium') || state.url.startsWith('/participations')  || state.url.startsWith('/fishs')  || state.url.startsWith('/users')){
+       return true;
+     }else{
+       router.navigate(['/unauthorized']);
+       return false;
+     }
+   }else if (response.role === 'JURY') {
+     if(state.url.startsWith('/competitions') || state.url.startsWith('/hunts') || state.url.startsWith('/podium') || state.url.startsWith('/participations') || state.url.startsWith('/fishs') ){
+       return true;
+     }else{
+       router.navigate(['/unauthorized']);
+       return false;
+     }
+   }else if (response.role === 'USER') {
+     if(state.url.startsWith('/competitions') || state.url.startsWith('/podium') || state.url.startsWith('/participations')){
+       return true;
+     }else{
+       router.navigate(['/unauthorized']);
+       return false;
+     }
+   }
+ }else {
+    router.navigate(['/status']);
+    return false;
+ }
 
-  if (response.role === 'MANAGER') {
-    if(state.url.startsWith('/competitions') || state.url.startsWith('/hunts') || state.url.startsWith('/podium') || state.url.startsWith('/participations')  || state.url.startsWith('/fishs')  || state.url.startsWith('/users')){
-      return true;
-    }else{
-      router.navigate(['/unauthorized']);
-      return false;
-    }
-  }else if (response.role === 'JURY') {
-    if(state.url.startsWith('/competitions') || state.url.startsWith('/hunts') || state.url.startsWith('/podium') || state.url.startsWith('/participations') || state.url.startsWith('/fishs') ){
-      return true;
-    }else{
-      router.navigate(['/unauthorized']);
-      return false;
-    }
-  }else if (response.role === 'USER') {
-    if(state.url.startsWith('/competitions') || state.url.startsWith('/podium') || state.url.startsWith('/participations')){
-      return true;
-    }else{
-      router.navigate(['/unauthorized']);
-      return false;
-    }
-  }
 
   return false;
 };

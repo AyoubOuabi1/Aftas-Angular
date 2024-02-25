@@ -12,11 +12,16 @@ import {authGuard} from "./guard/auth/auth.guard";
 import {UnauthorizedComponent} from "./components/unauthorized/unauthorized.component";
 import {roleGuard} from "./guard/role-guard.guard";
 import {unAuthGuard} from "./guard/auth/un-auth.guard";
+import {UserComponent} from "./components/user/user.component";
+import {AppComponent} from "./app.component";
+import {ActiveComponent} from "./components/active/active.component";
 
 const routes: Routes = [
   {path : "competitions", component: CompetitionComponent , canActivate: [authGuard, roleGuard]},
-  {path : "", component: CompetitionComponent, canActivate: [authGuard]},
+  {path : "status", component: ActiveComponent, canActivate: [authGuard]},
+  {path : "", component: AppComponent, canActivate: [authGuard]},
   {path : "fishs", component: FishComponent, canActivate: [authGuard, roleGuard]},
+  {path : "users", component: UserComponent, canActivate: [authGuard, roleGuard]},
   {path : "hunts", component: HuntComponent, canActivate: [authGuard, roleGuard]},
   {path : "members", component: MembersComponent, canActivate: [authGuard, roleGuard]},
   {path : "podium", component: PodiumComponent, canActivate: [authGuard, roleGuard]},

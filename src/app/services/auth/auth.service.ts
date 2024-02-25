@@ -37,7 +37,18 @@ export class AuthService {
       })
     );
   }
-
+  refreshToken(refreshToken: string): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(`${this._url}/refreshToken`, refreshToken).pipe(
+      map(response => {
+        this.saveToLocalStorage(response);
+        return response;
+      }),
+      catchError(error => {
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
   cleanStorage(){
     localStorage.removeItem('user');
   }
@@ -45,4 +56,23 @@ export class AuthService {
   saveToLocalStorage(response: ResponseDto) {
     localStorage.setItem('user', JSON.stringify(response));
   }
+
+  getAccessToken(): string | null {
+    const userString: string | null = localStorage.getItem('user');
+    if (userString) {
+      const user = JSON.parse(userString);
+      return user.accessToken;
+    }
+    return null;
+  }
+
+  getRefreshToken(): string | null {
+    const userString: string | null = localStorage.getItem('user');
+    if (userString) {
+      const user = JSON.parse(userString);
+      return user.refreshToken;
+    }
+    return null;
+  }
+
 }

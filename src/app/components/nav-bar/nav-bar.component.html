@@ -7,9 +7,14 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center">
         <li class="nav-item " *ngFor="let action of actions">
-          <a (click)="setCurrentAction(actions)"  [ngClass]="action==currentAction?'nav-link active text-white':'nav-link text-white'"  aria-current="page" routerLink="{{action.route}}">{{action.title}} </a>
+          <ng-container *ngIf="shouldShowAction(action)">
+            <a (click)="setCurrentAction(action)" [ngClass]="action == currentAction ? 'nav-link active text-white' : 'nav-link text-white'" aria-current="page" routerLink="{{action.route}}">{{action.title}}</a>
+          </ng-container>
         </li>
       </ul>
+      <div>
+        <a class="nav-link text-white btn btn-primary" href="#" (click)="logout()">Logout</a>
+      </div>
     </div>
   </div>
 </nav>
