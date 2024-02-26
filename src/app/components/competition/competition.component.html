@@ -13,12 +13,13 @@
         <option value="open">Open</option>
         <option value="close">Close</option>
         <option value="active">Active</option>
+        <option value="mycomps">My Competitions</option>
       </select>
     </div>
 
 
-    <button type="button" class="btn btn-primary float-start" (click)="resetForm()" data-bs-toggle="modal" data-bs-target="#competition-modal">
-    Create Competition
+    <button *ngIf="!checkUser()" type="button" class="btn btn-primary float-start" (click)="resetForm()" data-bs-toggle="modal" data-bs-target="#competition-modal">
+      Create Competition
     </button>
   </div>
 
@@ -34,8 +35,8 @@
       <th>Number Of Participants</th>
       <th>Status</th>
       <th>Amount</th>
-      <th> </th>
-      <th> </th>
+      <th *ngIf="!checkUser()"> </th>
+      <th *ngIf="!checkUser()"> </th>
     </tr>
     </thead>
     <tbody style="background-color: #0C1427">
@@ -48,12 +49,12 @@
       <td class="text-center">{{competition.numberOfParticipants}}</td>
       <td>{{competition.status}}</td>
       <td>{{competition.amount}}</td>
-      <td>
+      <td *ngIf="!checkUser()">
         <button (click)="deleteComp(competition)" class="btn btn-outline-danger">
           <i class="bi bi-trash"></i>
         </button>
       </td>
-      <td>
+      <td *ngIf="!checkUser()">
         <button (click)="editComp(competition)" data-bs-toggle="modal" data-bs-target="#competition-modal" class="btn btn-outline-primary">
           <i class="bi bi-pencil-square"></i>
         </button>

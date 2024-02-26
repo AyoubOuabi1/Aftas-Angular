@@ -9,7 +9,6 @@ import {UserService} from "../../services/member/user.service";
 })
 export class UserComponent implements OnInit{
   users !: UserModule [];
-  selectedUser: UserModule | null = null;
 
   constructor(private userService : UserService) {
   }
@@ -24,8 +23,14 @@ export class UserComponent implements OnInit{
   updateState(id: number)  {
     this.userService.updateUser(id).subscribe(response => {
       this.users = response;
-      console.log(this.users);
     })
 
   }
+
+  refresh() {
+    this.userService.getAllUsers().subscribe(response => {
+      this.users = response;
+    });
+  }
+
 }

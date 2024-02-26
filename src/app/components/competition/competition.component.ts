@@ -3,6 +3,7 @@ import { CompetitionModule } from "../../entities/competition/competition.module
 import { CompetitionService } from "../../services/competitions/competition.service";
 import { Observable } from "rxjs";
 import Swal from 'sweetalert2';
+import {ResponseDto} from "../../entities/user/responseDto.module";
 
 @Component({
   selector: 'app-competition',
@@ -18,7 +19,6 @@ export class CompetitionComponent implements OnInit {
   pageSize: number = 5;
   totalPages: number = 0;
   selectedStatus: string = "all";
-
   constructor(private competitionService: CompetitionService) {
   }
 
@@ -29,12 +29,25 @@ export class CompetitionComponent implements OnInit {
   }
 
   getCompetitions(): void {
-    this.competitionService.getComps(this.currentPage, this.pageSize, this.selectedStatus)
+    if (this.selectedStatus === "mycomps") {
+      this.getMyCompetitions();
+    }else {
+      this.competitionService.getComps(this.currentPage, this.pageSize, this.selectedStatus)
+        .subscribe(response => {
+          this.competitions = response.content;
+          this.totalPages = response.totalPages;
+        });
+    }
+  }
+
+  getMyCompetitions(): void {
+    this.competitionService.getMyComps(this.currentPage, this.pageSize, this.selectedStatus)
       .subscribe(response => {
         this.competitions = response.content;
         this.totalPages = response.totalPages;
       });
   }
+
   onStatusChange(): void {
      this.currentPage = 0;
     this.getCompetitions();
@@ -88,7 +101,12 @@ export class CompetitionComponent implements OnInit {
       }
     })
   }
+  checkUser(): boolean {
+    const responseString: string | null = localStorage.getItem('user');
+    const response: ResponseDto = responseString ? JSON.parse(responseString) : {};
+    return response.role === 'USER';
 
+  }
   changePage(page: number): void {
     this.currentPage = page;
     this.getCompetitions();

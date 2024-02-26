@@ -36,7 +36,7 @@ export class HuntComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.competitionService.getOpenComps().subscribe(
+    this.competitionService.getActiveComps().subscribe(
       (competitions) => {
       this.competitions = competitions;
       console.log(this.competitions);

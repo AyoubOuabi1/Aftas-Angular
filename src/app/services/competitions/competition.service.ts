@@ -15,6 +15,14 @@ export class CompetitionService {
     return this.httpClient.get<Array<CompetitionModule>>(this._url+"/open");
   }
 
+  public getMyComps(currentPage: number, size: number, status: string):Observable<CompetitionResponse>{
+    let params = new HttpParams()
+      .set('page', currentPage.toString())
+      .set('size', size.toString())
+      .set("status",status.toString());
+    return this.httpClient.get<CompetitionResponse>(this._url+"/myCompetitions", { params });
+  }
+
   public getActiveComps():Observable<Array<CompetitionModule>>{
     return this.httpClient.get<Array<CompetitionModule>>(this._url+"/active");
   }
@@ -24,8 +32,6 @@ export class CompetitionService {
       .set('page', currentPage.toString())
       .set('size', size.toString())
       .set("status",status.toString());
-
-
 
     return this.httpClient.get<CompetitionResponse>(`${this._url}/all`, { params });
   }

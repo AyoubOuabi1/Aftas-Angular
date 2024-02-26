@@ -57,22 +57,6 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(response));
   }
 
-  getAccessToken(): string | null {
-    const userString: string | null = localStorage.getItem('user');
-    if (userString) {
-      const user = JSON.parse(userString);
-      return user.accessToken;
-    }
-    return null;
-  }
 
-  getRefreshToken(): string | null {
-    const userString: string | null = localStorage.getItem('user');
-    if (userString) {
-      const user = JSON.parse(userString);
-      return user.refreshToken;
-    }
-    return null;
-  }
 
 }

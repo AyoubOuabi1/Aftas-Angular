@@ -11,7 +11,7 @@
           <option *ngFor="let competition of competitionsList | async" [value]="competition.id" >{{ competition.code }}</option>
         </select>
       </div>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ranking-modal">
+      <button *ngIf="!checkUser()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ranking-modal">
         Add participation
       </button>
     </div>

@@ -5,27 +5,8 @@
     <h4>Competitions</h4>
   </div>
   <div class="card-body mt-5">
-<!--
-    <div class="d-flex justify-content-between mb-3">
-      <div>
-        <select class="form-select" id="statusFilter" [(ngModel)]="selectedStatus"  (change)="onStatusChange()">
-          <option selected disabled>Filter by Status:</option>
-          <option value="all">All</option>
-          <option value="open">Open</option>
-          <option value="close">Close</option>
-          <option value="active">Active</option>
-        </select>
-      </div>
-
-
-      <button type="button" class="btn btn-primary float-start" (click)="resetForm()" data-bs-toggle="modal" data-bs-target="#competition-modal">
-        Create Competition
-      </button>
-    </div>
--->
-
     <div class="table-responsive">
-      <table id="example" class="table" >
+      <table id="example" class="table" (change)="refresh()" >
         <thead>
         <tr>
           <th>num</th>
@@ -34,7 +15,6 @@
           <th>email</th>
           <th>role</th>
           <th>activated</th>
-          <th> </th>
           <th> </th>
         </tr>
         </thead>
@@ -47,10 +27,11 @@
           <td>{{user.role}}</td>
           <td>{{user.active}}</td>
           <td>
-            <button  (click)="updateState(user.id)" class="btn btn-outline-danger">
+            <button [disabled]="user.active" (click)="updateState(user.id)" class="btn btn-success">
               <i>active</i>
             </button>
           </td>
+
 
         </tr>
         </tbody>
